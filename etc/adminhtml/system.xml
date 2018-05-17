@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="girit_lazyload" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" canRestore="1">
+			<label>LazyLoad Settings</label>
+			<tab>girit</tab>
+			<resource>Girit_LazyLoad::config</resource>
+			<group id="general_settings" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" canRestore="1">
+				<label>General Settings</label>
+				<field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="auto_replace_cms_blocks" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto Replace CMS Blocks</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="ignored_cms_blocks" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto Replace CMS Blocks - Ignored List</label>
+                    <comment><![CDATA[Enter cms blocks identifiers, separeted by new line]]></comment>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

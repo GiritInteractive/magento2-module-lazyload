@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <girit_lazyload>
+            <general_settings>
+                <active>1</active>
+                <auto_replace_cms_blocks>1</auto_replace_cms_blocks>
+            </general_settings>
+        </girit_lazyload>
+    </default>
+</config>

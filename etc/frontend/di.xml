@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Block\Product\ImageBuilder" type="Girit\LazyLoad\Block\Catalog\Product\ImageBuilder" />
+    
+    <type name="Magento\Catalog\Block\Category\View">
+        <plugin name="girit_lazyload_plugin_block_catalog_category_view" type="Girit\LazyLoad\Plugin\Block\Catalog\Category\View"/>
+    </type>
+    <type name="Magento\Cms\Block\Block">
+        <plugin name="girit_lazyload_plugin_block_cms_block_block" type="Girit\LazyLoad\Plugin\Block\Cms\Block"/>
+    </type>
+</config>

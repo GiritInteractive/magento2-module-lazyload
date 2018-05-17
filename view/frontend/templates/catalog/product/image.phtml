@@ -1,0 +1,22 @@
+<?php
+/**
+ * Girit-Interactive
+ * http://www.girit-tech.com
+ * +972-3-9177788
+ * info@girit.biz
+ *
+ * @package     Girit_Core
+ * @author      Pniel Cohen <pini@girit.biz>
+ * @license     https://opensource.org/licenses/OSL-3.0
+ * @copyright   © 2018 Girit-Interactive (https://www.girit-tech.com/). All rights reserved.
+ */
+?>
+<?php /** @var $block \Magento\Catalog\Block\Product\Image */ ?>
+
+<img class="photo image <?= /* @escapeNotVerified */ $block->getLazyloadClass() ?>"
+    <?= /* @escapeNotVerified */ $block->getCustomAttributes() ?>
+    <?= /* @escapeNotVerified */ $block->getSrcPlaceholder() ?>
+    <?= /* @escapeNotVerified */ $block->getSrcAttribute() ?>="<?= /* @escapeNotVerified */ $block->getImageUrl() ?>"
+    width="<?= /* @escapeNotVerified */ $block->getWidth() ?>"
+    height="<?= /* @escapeNotVerified */ $block->getHeight() ?>"
+    alt="<?= /* @escapeNotVerified */ $block->stripTags($block->getLabel(), null, true) ?>" />
