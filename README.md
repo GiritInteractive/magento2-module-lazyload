@@ -46,7 +46,7 @@ Then, since Simple HTML DOM isn’t PSR-0 compliant, you need to add the followi
 }
 ```
 
-Then, download & place the contents of this repository under {YOUR-MAGENTO2-ROOT-DIR}/app/code/Girit/Lazyload
+Then, download & place the contents of this repository under {YOUR-MAGENTO2-ROOT-DIR}/app/code/Girit/LazyLoad
 
 Finally, run the following commands under your Magento 2 root dir:
 ```
