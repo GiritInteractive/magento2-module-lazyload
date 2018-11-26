@@ -7,10 +7,22 @@ require([
     var initLazyloadAndEasyload = function(container) {
         var container = container || "body";
         if ($(container + " .lazyload").length) {
-            $(container + " .lazyload").lazyload({
-                threshold: 300,
-                effect: "fadeIn"
-            });
+            try {
+                $(container + " .lazyload").lazyload({
+                    threshold: 300,
+                    effect: "fadeIn"
+                });
+            } catch (err) {
+                console.warn("Notice: An error occured while initializing Lazyload (" + err + "), Falling back to easylazy instead.");
+                $(container + " .lazyload").each(function() {
+                    if ($(this).is("img") || $(this).is("iframe")) {
+                        $(this).attr("src", $(this).attr("data-original"));
+                    } else {
+                        $(this).css("background-image", "url('" + $(this).attr("data-original") + "')");
+                    }
+                    $(this).removeClass("lazyload");
+                });
+            }
         }
         if ($(container + " .easylazy").length) {
             setTimeout(function() {
@@ -24,6 +36,7 @@ require([
             }, 2100);
         }
     };
+
 
     $(document).ready(function($) {
         // Initialize LazyLoad on images, iframes, etc...
