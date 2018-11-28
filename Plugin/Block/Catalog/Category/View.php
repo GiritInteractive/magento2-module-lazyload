@@ -32,29 +32,30 @@ class View
         $this->_giritLazyLoadHelper = $giritLazyLoadHelper;
     }
 
-    public function afterGetCmsBlockHtml($subject, $html) {
-        if(!$this->_giritLazyLoadHelper->isAutoReplaceCmsBlocks() || in_array($subject->getCurrentCategory()->getLandingPage(), $this->_giritLazyLoadHelper->getIgnoredCmsBlocksArray())){
+    public function afterGetCmsBlockHtml($subject, $html)
+    {
+        if (!$this->_giritLazyLoadHelper->isEnabled() || !$this->_giritLazyLoadHelper->isAutoReplaceCmsBlocks() || in_array($subject->getCurrentCategory()->getLandingPage(), $this->_giritLazyLoadHelper->getIgnoredCmsBlocksArray())) {
             return $html;
         }
 
         $_hagImages = false;
         $_hagIframes = false;
 
-        if(stripos($html, "<img ") !== false){
+        if (stripos($html, "<img ") !== false) {
             $_hagImages = true;
         }
 
-        if(stripos($html, "<iframe ") !== false){
+        if (stripos($html, "<iframe ") !== false) {
             $_hagIframes = true;
         }
 
-        if($_hagImages || $_hagIframes){
+        if ($_hagImages || $_hagIframes) {
             $simpleHtmlDom = new \simple_html_dom();
             $simpleHtmlDom->load($html);
 
-            if($_hagImages){
+            if ($_hagImages) {
                 foreach ($simpleHtmlDom->find('img') as $element) {
-                    if(strpos($element->class, "lazyload") === false && strpos($element->class, "easylazy") === false && strpos($element->class, "owl-lazy") === false){
+                    if (strpos($element->class, "lazyload") === false && strpos($element->class, "easylazy") === false && strpos($element->class, "owl-lazy") === false) {
                         $element->class = 'lazyload ' . $element->class;
                         $element->{'data-original'} = $element->src;
                         $element->src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC';
@@ -62,9 +63,9 @@ class View
                 }
             }
 
-            if($_hagIframes){
+            if ($_hagIframes) {
                 foreach ($simpleHtmlDom->find('iframe') as $element) {
-                    if(strpos($element->class, "lazyload") === false && strpos($element->class, "easylazy") === false && strpos($element->class, "owl-lazy") === false){
+                    if (strpos($element->class, "lazyload") === false && strpos($element->class, "easylazy") === false && strpos($element->class, "owl-lazy") === false) {
                         $element->class = 'easylazy ' . $element->class;
                         $element->{'data-src'} = $element->src;
                         $element->src = null;
@@ -77,5 +78,4 @@ class View
 
         return $html;
     }
-
 }

@@ -13,10 +13,16 @@
 
 namespace Girit\LazyLoad\Block\Catalog\Product;
 
+use Magento\Catalog\Block\Product\ImageFactory;
 use Magento\Catalog\Helper\ImageFactory as HelperFactory;
 
 class ImageBuilder extends \Magento\Catalog\Block\Product\ImageBuilder
 {
+
+    /**
+     * @var \Girit\LazyLoad\Helper\Data
+     */
+    protected $_giritLazyLoadHelper;
 
     /**
      * @var string
@@ -39,6 +45,20 @@ class ImageBuilder extends \Magento\Catalog\Block\Product\ImageBuilder
     protected $srcPlaceholder = "";
 
     /**
+     * @param HelperFactory $helperFactory
+     * @param ImageFactory $imageFactory
+     * @param \Girit\LazyLoad\Helper\Data $giritLazyLoadHelper
+     */
+    public function __construct(
+        HelperFactory $helperFactory,
+        ImageFactory $imageFactory,
+        \Girit\LazyLoad\Helper\Data $giritLazyLoadHelper
+    ) {
+        parent::__construct($helperFactory, $imageFactory);
+        $this->_giritLazyLoadHelper = $giritLazyLoadHelper;
+    }
+
+    /**
      * Set custom attributes
      *
      * @param array $attributes
@@ -46,11 +66,13 @@ class ImageBuilder extends \Magento\Catalog\Block\Product\ImageBuilder
      */
     public function setAttributes(array $attributes)
     {
-        if(isset($attributes['lazyload'])){
-            $this->setLazyload($attributes['lazyload']);
-            unset($attributes['lazyload']);
-        }else{
-            $this->setLazyload('lazyload');
+        if ($this->_giritLazyLoadHelper->isEnabled()) {
+            if (isset($attributes['lazyload'])) {
+                $this->setLazyload($attributes['lazyload']);
+                unset($attributes['lazyload']);
+            } else {
+                $this->setLazyload('lazyload');
+            }
         }
         return parent::setAttributes($attributes);
     }
@@ -120,7 +142,6 @@ class ImageBuilder extends \Magento\Catalog\Block\Product\ImageBuilder
         return $this->srcPlaceholder;
     }
 
-
     /**
      * Create image block
      *
@@ -128,6 +149,10 @@ class ImageBuilder extends \Magento\Catalog\Block\Product\ImageBuilder
      */
     public function create()
     {
+        if (!$this->_giritLazyLoadHelper->isEnabled()) {
+            return parent::create();
+        }
+
         /** @var \Magento\Catalog\Helper\Image $helper */
         $helper = $this->helperFactory->create()
             ->init($this->product, $this->imageId);

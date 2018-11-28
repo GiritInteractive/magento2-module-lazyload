@@ -58,22 +58,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function isEnabled()
     {
-        return ($this->getConfig(self::XML_PATH_ENABLED))? true : false;
+        return ($this->getConfig(self::XML_PATH_GENERAL_ENABLED)) ? true : false;
     }
 
     public function isAutoReplaceCmsBlocks()
     {
-        return ($this->getConfig(self::XML_PATH_AUTO_REPLACE_CMS_BLOCKS))? true : false;
+        return ($this->getConfig(self::XML_PATH_AUTO_REPLACE_CMS_BLOCKS)) ? true : false;
     }
 
     public function getIgnoredCmsBlocksArray()
     {
-        if(!is_null($this->_ignoredCmsBlocksArray)){
+        if (!is_null($this->_ignoredCmsBlocksArray)) {
             return $this->_ignoredCmsBlocksArray;
         }
         return $this->_ignoredCmsBlocksArray = (array) array_map('trim', preg_split('/\r\n|\r|\n/', $this->getConfig(self::XML_PATH_IGNORED_CMS_BLOCKS)));
     }
 
     //=====================================================================================================//
-
 }
