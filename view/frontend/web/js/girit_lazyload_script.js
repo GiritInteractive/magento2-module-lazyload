@@ -4,7 +4,7 @@ require([
 ], function($, LazyLoad) {
     "use strict";
 
-    var initLazyloadAndEasyload = function(container) {
+    var initLazyloadAndEasyload = window.initLazyloadAndEasyload = function(container) {
         var container = container || "body";
         if ($(container + " .lazyload").length) {
             try {
@@ -37,8 +37,8 @@ require([
         }
     };
 
-
     $(document).ready(function($) {
+
         // Initialize LazyLoad on images, iframes, etc...
         initLazyloadAndEasyload();
     });
