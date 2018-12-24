@@ -2,7 +2,7 @@
     "name": "girit/magento2-module-lazyload",
     "description": "Magento 2 LazyLoad module by Girit Interactive",
     "type": "magento2-module",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
